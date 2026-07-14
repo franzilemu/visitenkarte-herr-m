@@ -1,0 +1,72 @@
+name: Prüfung
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  html-pruefung:
+    name: HTML-Prüfung
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: HTML-Struktur und lokale Links prüfen
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          fehler=0
+
+          echo "== Prüfe HTML-Dateien =="
+          while IFS= read -r -d '' datei; do
+            echo "-- $datei"
+
+            if ! grep -qi '<!doctype html>' "$datei"; then
+              echo "FEHLER: $datei enthält kein <!doctype html>"
+              fehler=1
+            fi
+
+            if ! grep -q '<html lang="de">' "$datei"; then
+              echo "FEHLER: $datei enthält kein <html lang=\"de\">"
+              fehler=1
+            fi
+
+            if ! grep -qi '<title>.*</title>' "$datei"; then
+              echo "FEHLER: $datei enthält kein <title>"
+              fehler=1
+            fi
+
+            ordner=$(dirname "$datei")
+
+            # Alle lokalen href/src-Ziele extrahieren (keine externen URLs, keine Anker/Mailto)
+            ziele=$(grep -oE '(href|src)="[^"]+"' "$datei" | sed -E 's/^(href|src)="//; s/"$//' || true)
+
+            while IFS= read -r ziel; do
+              [ -z "$ziel" ] && continue
+
+              case "$ziel" in
+                http://*|https://*|mailto:*|tel:*|\#*)
+                  continue
+                  ;;
+              esac
+
+              ziel_ohne_anker="${ziel%%#*}"
+              [ -z "$ziel_ohne_anker" ] && continue
+
+              pfad="$ordner/$ziel_ohne_anker"
+
+              if [ ! -f "$pfad" ]; then
+                echo "FEHLER: $datei verweist auf fehlende Datei: $ziel_ohne_anker"
+                fehler=1
+              fi
+            done <<< "$ziele"
+          done < <(find . -name "*.html" -print0)
+
+          if [ "$fehler" -ne 0 ]; then
+            echo "HTML-Prüfung fehlgeschlagen."
+            exit 1
+          fi
+
+          echo "HTML-Prüfung erfolgreich."
