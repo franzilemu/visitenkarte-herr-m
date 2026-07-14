@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Abstraktes Portrait-Platzhalterbild von Herrn M.">
+  <title>Portrait-Platzhalter Herr M.</title>
+  <defs>
+    <linearGradient id="hintergrund" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e8f1f0" />
+      <stop offset="100%" stop-color="#c9dedd" />
+    </linearGradient>
+    <linearGradient id="kreis" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1c7a80" />
+      <stop offset="100%" stop-color="#14555a" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#hintergrund)" />
+  <circle cx="200" cy="200" r="150" fill="url(#kreis)" />
+  <text
+    x="200"
+    y="200"
+    text-anchor="middle"
+    dominant-baseline="central"
+    font-family="Helvetica Neue, Arial, sans-serif"
+    font-size="120"
+    font-weight="600"
+    fill="#faf8f4"
+  >M.</text>
+</svg>

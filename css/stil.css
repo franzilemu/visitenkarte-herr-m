@@ -1,0 +1,187 @@
+/* Visitenkarten-Webseite für Herrn M. — zentrales Stylesheet */
+
+:root {
+  --farbe-hintergrund: #faf8f4;
+  --farbe-karte: #ffffff;
+  --farbe-text: #2c3338;
+  --farbe-text-schwach: #5a6570;
+  --farbe-akzent: #14555a;
+  --farbe-akzent-hell: #1c7a80;
+  --farbe-rahmen: #e4ded3;
+  --radius: 14px;
+  --schatten: 0 8px 24px rgba(20, 85, 90, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--farbe-hintergrund);
+  color: var(--farbe-text);
+  font-family: "Helvetica Neue", Arial, "Segoe UI", sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.karte {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 3rem;
+  flex: 1;
+}
+
+header.kopf {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.portrait {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 1.25rem;
+  box-shadow: var(--schatten);
+  background-color: var(--farbe-karte);
+}
+
+.portrait img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+h1 {
+  margin: 0 0 0.35rem;
+  font-size: 1.85rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.untertitel {
+  margin: 0;
+  color: var(--farbe-akzent);
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+nav.navigation {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 1.75rem 0;
+  padding: 0.75rem 0;
+  border-top: 1px solid var(--farbe-rahmen);
+  border-bottom: 1px solid var(--farbe-rahmen);
+}
+
+nav.navigation a {
+  color: var(--farbe-text);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 0.25rem 0.1rem;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+nav.navigation a:hover,
+nav.navigation a:focus {
+  color: var(--farbe-akzent);
+  border-bottom-color: var(--farbe-akzent-hell);
+}
+
+main {
+  background-color: var(--farbe-karte);
+  border: 1px solid var(--farbe-rahmen);
+  border-radius: var(--radius);
+  padding: 1.75rem 1.75rem 2rem;
+  box-shadow: var(--schatten);
+}
+
+main h2 {
+  margin-top: 0;
+  font-size: 1.25rem;
+  color: var(--farbe-akzent);
+}
+
+main p {
+  color: var(--farbe-text);
+}
+
+.kontakt-zeile {
+  margin: 0.6rem 0;
+}
+
+.kontakt-zeile strong {
+  color: var(--farbe-text-schwach);
+  font-weight: 500;
+  display: inline-block;
+  min-width: 90px;
+}
+
+/* Kontakt-Icons — verwendet auf der Kontaktseite */
+.kontakt-icons {
+  margin-top: 1.25rem;
+}
+
+.kontakt-icons .icon-zeile {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.kontakt-icons svg {
+  flex-shrink: 0;
+  color: var(--farbe-akzent);
+}
+
+.icon-einheitlich {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.impressum-hinweis {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--farbe-rahmen);
+  font-size: 0.85rem;
+  color: var(--farbe-text-schwach);
+}
+
+footer.fuss {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 0.85rem;
+  color: var(--farbe-text-schwach);
+}
+
+footer.fuss a {
+  color: var(--farbe-text-schwach);
+}
+
+@media (max-width: 480px) {
+  .karte {
+    padding: 1.75rem 1.1rem 2.5rem;
+  }
+
+  h1 {
+    font-size: 1.55rem;
+  }
+
+  nav.navigation {
+    gap: 1rem;
+  }
+}
